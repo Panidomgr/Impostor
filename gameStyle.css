@@ -1,0 +1,252 @@
+:root {
+    --bg: #0f172a;
+    --light-bg: #141c2f;
+    --bg-2: #1e293b;
+    --light-bg-2: #2d384b;
+    --hl: #facc15;
+    --blue: #38bdf8;
+    --light-blue: #65cdfa;
+    --dark-blue: #084a7f;
+    --red: #f43f5e;
+    --light-red: #e95870;
+    --dark-red: #700e1e;
+    --green: #4ade80;
+    --purple: #c084fc;
+    --light-purple: #cca5f3;
+    --gray: #94a3b8;
+    --text: #f8fafc;
+    --text-2: #101114;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.russo-one-regular {
+    font-family: "Russo One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.non-sel {
+    user-select: none;
+}
+
+
+
+body {
+    background: linear-gradient(135deg, var(--light-red), var(--light-blue));
+    height: 100vh;
+    margin: 0;
+    padding: 50px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.word-card {
+    border: 5px solid black;
+    box-shadow: 10px 10px 10px black;
+    max-width: 400px;
+    width: 80%;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--bg);
+    border-radius: 40px;
+    padding: 20px;
+    font-size: 2em;
+    color: var(--text);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.word-card:hover {
+    background-color: var(--bg-2);
+    transform: translateY(-20px) translateX(-10px);
+}
+
+#revealed-crew {
+    display: none;
+    background: radial-gradient(var(--dark-blue), var(--blue));
+}
+
+#unrevealed {
+    display: none;
+}
+
+.logo {
+    max-height: 300px;
+}
+
+.player-name {
+    font-size: 2em;
+}
+
+.word-card>img {
+    width: 80%;
+}
+
+#word {
+    font-size: 2em;
+    word-break: break-all;
+}
+
+#revealed-imp {
+    display: none;
+    background: radial-gradient(var(--dark-red), var(--red));
+}
+
+#unrevealed.shown,
+#revealed-crew.shown,
+#revealed-imp.shown,
+#voting-phase-div.shown,
+#results-div.shown {
+    display: flex !important;
+    animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+        /* Starts slightly smaller */
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        /* Ends normal size */
+    }
+}
+
+
+
+#voting-phase-div {
+    border: 5px solid var(--green);
+    background-color: var(--bg);
+    padding: 20px;
+    border-radius: 20px;
+    width: 80%;
+    height: 70%;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+#starting-player {
+    width: 100%;
+    height: 100%;
+    color: var(--text);
+    font-size: 3em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#starting-player-name {
+    color: var(--hl);
+}
+
+#reveal-button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#reveal-button > div {
+    font-size: 2em;
+    color: var(--text);
+    border: 3px solid blueviolet;
+    padding: 10px;
+    background-color: var(--purple);
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#reveal-button > div:hover {
+    box-shadow: 0 0 50px purple;
+    border: 3px solid rgb(165, 96, 230);
+}
+
+
+
+#results-div {
+    border: 3px dashed var(--purple);
+    width: 80%;
+    height: 80%;
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background: radial-gradient(var(--light-bg-2), var(--bg));
+    font-size: 2em;
+    color: var(--text);
+    border-radius: 50px;
+    padding: 30px;
+}
+
+#results-div > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+#imp-name {
+    color: var(--red);
+    font-size: 1.5em;
+}
+
+#result-word {
+    color: var(--hl);
+    font-size: 1.5em;
+}
+
+#play-again-button {
+    font-size: 0.8em;
+    max-width: 50%;
+    max-height: 15%;
+    color: var(--text-2);
+    border: 3px solid blueviolet;
+    padding: 10px;
+    background-color: var(--purple);
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#play-again-button:hover {
+    box-shadow: 0 0 50px purple;
+    border: 3px solid rgb(165, 96, 230);
+}
+
+#exit-button {
+    font-size: 2em;
+    color: var(--text-2);
+    letter-spacing: 10px;
+    width: fit-content;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#exit-button:hover {
+    font-size: 2.5em;
+    color: var(--text);
+}

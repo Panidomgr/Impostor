@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="game_page_title"></title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png">
+    <link rel="stylesheet" href="gameStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <script type="module" src="gameScript.js" defer></script>
+</head>
+
+<body class="russo-one-regular non-sel">
+    <div id="exit-button" onclick="exit();" data-lang="exit"></div>
+    <main>
+        <div class="word-card" id="unrevealed" onclick="revealWordCard();">
+            <div id="player-name">
+
+            </div>
+            <img class="logo" src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png" alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
+            <div data-lang="tap_to_reveal"></div>
+        </div>
+        <div class="word-card" id="revealed-crew" onclick="nextWordCard();">
+            <div id="description" data-lang="find_the_impostor"></div>
+            <div id="word">Teo</div>
+            <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/crew_r2b0xi.png" alt="Crew-Logo" draggable="false" data-lang-alt="alt_crew">
+        </div>
+        <div class="word-card" id="revealed-imp" onclick="nextWordCard();">
+            <div id="description" data-lang="youre_the_impostor"></div>
+            <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/imp_tucedk.png" alt="Impostor-Logo" draggable="false" data-lang-alt="alt_imp">
+        </div>
+        <div id="voting-phase-div">
+            <div id="starting-player">
+                <div data-lang="starting_player"></div>
+                <span id="starting-player-name"></span>
+            </div>
+            <div id="reveal-button" onclick="revealResults();">
+                <div data-lang="reveal_results"></div>
+            </div>
+        </div>
+        <div id="results-div">
+            <div>
+                <div id="results-text" data-lang="the_impostor_was"></div>
+                <div id="imp-name"></div>
+            </div>
+            <div>
+                <div data-lang="the_word_was"></div>
+                <div id="result-word"></div>
+            </div>
+            <div id="play-again-button" onclick="playAgain();" data-lang="play_again"></div>
+        </div>
+    </main>
+</body>
+
+</html>

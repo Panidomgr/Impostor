@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="menu_page_title"></title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="script.js" defer></script>
+</head>
+
+<body class="play-bold non-sel">
+    <header>
+        <div>
+            <img class="logo" src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png" alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
+            <div data-lang="title"></div>
+            <img class="logo" src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png" alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
+        </div>
+        <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766811712/lang_ru9svr.png" onclick="toggleLanguage()" data-lang-alt="alt_lang">
+    </header>
+    <main>
+        <div id="main-page-box">
+            <div class="main-page-button" onclick="openCatsTab()" data-lang="categories"></div>
+            <div class="main-page-button" style="gap: 0; background-color: var(--hl); padding: 0;"
+                onclick="toggleGameMode()">
+                <div class="game-mode left active" id="Words" data-lang="words"></div>
+                <div class="game-mode right" id="Questions" data-lang="questions"></div>
+            </div>
+            <div class="main-page-button" onclick="openPlayersTab()" data-lang="players"></div>
+            <div class="main-page-button non-interactible" id="impostors-count-box">
+                <div data-lang="impostors"></div>
+                <input value="1" max="10" min="0" type="number" class="" onchange="getImpostorsNumber(this)">
+            </div>
+        </div>
+        <div id="main-page-players-box">
+            <div id="m-p-p-c-plus" class="active" onclick="makePlayerCard()">+</div>
+            <div id="m-p-p-c-close" onclick="closePlayersTab()">X</div>
+            <div id="m-p-p-c-cards-box"></div>
+        </div>
+        <div id="main-page-cats-box">
+            <div id="m-p-c-c-close" onclick="closeCatsTab()">X</div>
+            <div id="m-p-c-c-cards-box">
+            </div>
+        </div>
+    </main>
+    <div id="playButt" class="main-page-button" onclick="start()" data-lang="play"></div>
+</body>
+
+</html>
