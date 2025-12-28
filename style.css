@@ -97,31 +97,71 @@ main {
 
 header {
     width: 100%;
+    padding: 20px 10px;
+    position: relative; /* Needed for absolute positioning the lang button */
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-header>div {
-    height: 100px;
-    display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    font-size: 5em;
+    margin-bottom: 20px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Space between images and text */
+    width: 100%;
+    max-width: 800px;
+}
+
+.header-icon {
+    width: 60px; /* Default size */
+    height: auto;
+    filter: drop-shadow(0 0 5px var(--blue)); /* Blue glow for images */
+    transition: transform 0.3s ease;
+}
+
+.game-title {
+    margin: 0;
+    font-size: clamp(2rem, 8vw, 5em); /* Dynamic sizing: Min 2rem, Max 5em */
     color: var(--text);
-    font-weight: bolder;
-    width: 70%;
-    gap: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px; /* Cinematic spacing */
+    text-align: center;
+    
+    /* The "Impostor" Vibe: Red/Purple Shadow stack */
+    text-shadow: 
+        3px 3px 0px var(--dark-red),
+        6px 6px 0px var(--bg-2),
+        0 0 20px var(--red);
+    
+    /* Animation */
+    animation: floating 3s ease-in-out infinite;
 }
 
-header>img {
-    max-width: 80px;
+.lang-switch-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+}
+
+.lang-switch-wrapper img {
+    width: 50px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 5px var(--purple));
 }
 
-header>img:hover {
-    max-width: 100px;
+.lang-switch-wrapper img:hover {
+    transform: scale(1.1) rotate(10deg);
+    filter: drop-shadow(0 0 15px var(--hl));
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
 }
 
 #impostors-count-box input {
@@ -448,11 +488,16 @@ header>img:hover {
     .cat-title {
         font-size: 1em;
     }
+
+    header {
+        flex-wrap: wrap;
+        height: auto;
+    }
 }
 
 @media (max-width: 500px) {
     header>div {
-        font-size: 3em;
+        font-size: 4em;
     }
 
     .main-page-button {
@@ -517,16 +562,94 @@ header>img:hover {
     }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 860px) {
     header>div {
-        flex-wrap: wrap;
-        height: auto;
+        font-size: 4em;
     }
-
 }
 
-@media (max-width: 670px) {
+@media (max-width: 700px) {
     header>div {
-        width: 100%;
+        font-size: 3em;
+    }
+
+    header {
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-icon {
+        width: 45px;
+    }
+    .game-title {
+        /* Text shadow smaller on mobile */
+        text-shadow: 2px 2px 0px var(--dark-red), 0 0 10px var(--red);
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 500px) {
+    header {
+        flex-direction: column; /* Stack items if needed */
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .logo-container {
+        /* On very small screens, hide the second logo to save space? 
+           Or keep both but make them tiny. Let's keep both tiny. */
+        gap: 10px;
+    }
+
+    .header-icon {
+        width: 35px; /* Small icons */
+    }
+
+    .game-title {
+        /* The clamp() above handles font size, but we reduce spacing */
+        letter-spacing: 2px;
+    }
+
+    /* Move Language button to top right corner instead of centered right */
+    .lang-switch-wrapper {
+        top: 10px;
+        right: 10px;
+        transform: none;
+    }
+    
+    .lang-switch-wrapper img {
+        width: 35px;
+    }
+}
+
+@media (max-width: 450px) {
+    header {
+        /* 1. Create vertical breathing room at the top */
+        padding-top: 50px; 
+    }
+
+    .lang-switch-wrapper {
+        /* 2. Pin button to the top-right corner */
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        transform: none; /* Remove the vertical centering */
+    }
+
+    /* 3. Optional: Shrink the button slightly */
+    .lang-switch-wrapper img {
+        width: 35px;
+    }
+
+    /* 4. Ensure the logo text doesn't stay too huge */
+    .game-title {
+        font-size: 2.5rem; /* Force a safe size */
+    }
+    
+    .header-icon {
+        width: 30px; /* Shrink side icons to save width */
     }
 }
