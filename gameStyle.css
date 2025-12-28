@@ -223,7 +223,7 @@ main {
 #play-again-button {
     font-size: 0.8em;
     max-width: 50%;
-    max-height: 15%;
+    max-height: fit-content;
     color: var(--text-2);
     border: 3px solid blueviolet;
     padding: 10px;
@@ -231,6 +231,9 @@ main {
     border-radius: 0.5em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    height: auto;
+    text-align: center;
+    overflow: hidden;
 }
 
 #play-again-button:hover {
@@ -253,15 +256,40 @@ main {
     color: var(--text);
 }
 
+@media (max-width: 600px) {
+    #results-div {
+        width: 100%;
+    }
+
+    body {
+        padding: 20px;
+    }
+}
+
 @media (max-width: 440px) {
     #reveal-button>div {
         width: 80%;
-        font-size: 1em;
         word-break: break-all;
         overflow: hidden;
     }
 
-    #starting-player > * {
+    .word-card, #voting-phase-div{
+        width: 100%;
+    }
+
+    #results-div *:not(#play-again-button) {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 400px) {
+    #reveal-button>div {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 310px) {
+    #starting-player>* {
         font-size: 0.7em;
     }
 }
