@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-lang="menu_page_title"></title>
-    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png">
+    <link rel="icon" type="image/png"
+        href="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,12 +16,19 @@
 
 <body class="play-bold non-sel">
     <header>
-        <div>
-            <img class="logo" src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png" alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
-            <div data-lang="title"></div>
-            <img class="logo" src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png" alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
+        <div class="logo-container">
+            <img class="header-icon"
+                src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png"
+                alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
+            <h1 class="game-title" data-lang="title"></h1>
+            <img class="header-icon"
+                src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png"
+                alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
         </div>
-        <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766811712/lang_ru9svr.png" onclick="toggleLanguage()" data-lang-alt="alt_lang">
+        <div class="lang-switch-wrapper">
+            <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766811712/lang_ru9svr.png"
+                onclick="toggleLanguage()" data-lang-alt="alt_lang">
+        </div>
     </header>
     <main>
         <div id="main-page-box">
