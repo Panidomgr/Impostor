@@ -1,12 +1,13 @@
 import { categoriesWords, categoriesQuestions, translations } from "./database.js";
 
+// --- 1. DATA LOADING ---
 var savedJSON = localStorage.getItem('impostorSaveData');
 var data;
 
 if (savedJSON) {
     data = JSON.parse(savedJSON);
 } else {
-    // Fallback if no save exists immediately
+    // Fallback if no save exists
     data = {
         players: ["Player 1", "Player 2", "Player 3"],
         impostors: 1,
@@ -15,36 +16,33 @@ if (savedJSON) {
     };
 }
 
-if (data.players.length === 0) {
+if (!data.players || data.players.length === 0) {
     data.players = ["Player 1", "Player 2", "Player 3"];
 }
 
-// console.log(data);
-
-
-
+// --- 2. GAME VARIABLES ---
 var playerIndex = 0;
 // Structure: [ ["Name", "Role"], ["Name", "Role"] ]
 var players = data.players.map(plr => [plr, "Undefined"]);
 let busy = false;
 var words = [];
 var chosenWord = "";
+var currentLang = "en"; // Default
 
-
+// DOM Elements
 var unrevealed = document.getElementById('unrevealed');
 var crewCard = document.getElementById('revealed-crew');
 var impCard = document.getElementById('revealed-imp');
 
-var currentLang = "en"; // Default
 
-
+// --- 3. LANGUAGE FUNCTIONS ---
 function setLanguage(lang) {
-    // 1. Update Variable & Body Class...
+    // A. Update Variable & Body Class
     currentLang = lang;
     document.body.classList.remove('lang-en', 'lang-gr');
     document.body.classList.add('lang-' + lang);
 
-    // 2. Update Text Content...
+    // B. Update Text Content
     const elements = document.querySelectorAll('[data-lang]');
     elements.forEach(element => {
         const key = element.getAttribute('data-lang');
@@ -53,13 +51,13 @@ function setLanguage(lang) {
         }
     });
 
-    // 3. Update Placeholders...
+    // C. Update Placeholders
     const inputs = document.querySelectorAll('.m-p-p-c-name');
     inputs.forEach(input => {
         input.placeholder = translations[lang]["placeholder_name"];
     });
 
-    // --- 4. NEW: Update Image Alts ---
+    // D. Update Image Alts
     const images = document.querySelectorAll('[data-lang-alt]');
     images.forEach(img => {
         const key = img.getAttribute('data-lang-alt');
@@ -67,26 +65,58 @@ function setLanguage(lang) {
             img.alt = translations[lang][key];
         }
     });
-    // ---------------------------------
 
-    // 5. Save to LocalStorage...
+    // E. Save to LocalStorage
     localStorage.setItem('impostorLang', lang);
 }
 
 function toggleLanguage() {
-    if (currentLang === "en") {
-        setLanguage("gr");
-    } else {
-        setLanguage("en");
-    }
+    const oldLang = currentLang;
+    const newLang = currentLang === "en" ? "gr" : "en";
 
-    // Optional: Reload dynamic content (like categories) if they have translations too
-    // fillCats(); 
+    // 1. Update all standard UI elements (Buttons, Headers, etc.)
+    setLanguage(newLang);
+
+    // 2. Find and Translate the Active Game Word
+    // Combine both lists so we search everywhere
+    const allCats = [...categoriesWords, ...categoriesQuestions];
+
+    for (const cat of allCats) {
+        // Safety Check: Ensure this category has lists for both languages
+        if (cat.words && cat.words[oldLang] && cat.words[newLang]) {
+            
+            // Try to find the current chosenWord in the OLD language list
+            const index = cat.words[oldLang].indexOf(chosenWord);
+
+            if (index !== -1) {
+                // Found it! Get the corresponding word from the NEW language list
+                const translatedWord = cat.words[newLang][index];
+
+                // If a translation exists, update the game state
+                if (translatedWord) {
+                    chosenWord = translatedWord;
+
+                    // Update the text on the revealed card immediately
+                    const wordDiv = document.querySelector("#word");
+                    if (wordDiv) wordDiv.textContent = chosenWord;
+
+                    // Update the results screen if the game is already over
+                    const resultWordDiv = document.querySelector("#result-word");
+                    if (resultWordDiv) resultWordDiv.textContent = chosenWord;
+                }
+                
+                // We found our match, no need to keep checking other categories
+                break; 
+            }
+        }
+    }
 }
+
+
+// --- 4. GAME LOGIC FUNCTIONS ---
 
 function exit() {
     var userAgreed = confirm(translations[currentLang]["exit_msg"]);
-
     if (userAgreed) {
         window.location.href = "index.html";
     }
@@ -94,8 +124,8 @@ function exit() {
 
 function fillWordCardUnrevealed() {
     let plrs = data.players;
-
     var nameDiv = document.querySelector("#player-name");
+    // Player names are user input, so they don't get translated
     nameDiv.textContent = plrs[playerIndex];
 }
 
@@ -115,7 +145,6 @@ function showUnrevealedCard() {
 
 function fillWordCardRevealed() {
     var wordDiv = document.querySelector("#word");
-
     wordDiv.textContent = chosenWord;
 }
 
@@ -154,50 +183,35 @@ function nextWordCard() {
 }
 
 function determineImpostors() {
-    // 1. First, set EVERYONE to "Crew" by default
+    // Reset to Crew
     for (let i = 0; i < players.length; i++) {
         players[i][1] = "Crew";
     }
 
-    // 2. Create a temporary pool of indexes (0, 1, 2, etc.)
-    // We will pick numbers from here and remove them so we don't pick duplicates.
     let candidates = [];
     for (let i = 0; i < players.length; i++) {
         candidates.push(i);
     }
 
-    // 3. Loop based on how many impostors we need
-    var impCount = parseInt(data.impostors); // Make sure it's a number
+    var impCount = parseInt(data.impostors);
 
     for (let i = 0; i < impCount; i++) {
-        // If we run out of players (safety check), stop
         if (candidates.length === 0) break;
-
-        // Pick a random spot in our list of CANDIDATES
         let randomIndex = Math.floor(Math.random() * candidates.length);
-
-        // Find out which real player ID was at that spot
         let realPlayerIndex = candidates[randomIndex];
-
-        // Mark that player as Impostor
         players[realPlayerIndex][1] = "Impostor";
-
-        // Remove that index from candidates so they can't be picked again
         candidates.splice(randomIndex, 1);
     }
-
-    // console.log("Players:", players);
 }
 
 function determineWord() {
-
     let myCats = categoriesWords;
-
     words = [];
     chosenWord = "";
 
     for (let i = 0; i < data.activeCats.length; i++) {
         let cat = myCats.find(cat => cat.id === data.activeCats[i]);
+        // This picks the word list based on the CURRENT language at start
         let wordList = cat.words[currentLang]; 
         
         if (wordList) {
@@ -209,24 +223,27 @@ function determineWord() {
         }
     }
 
-    let randomIndex = Math.floor(Math.random() * words.length);
-
-    chosenWord = words[randomIndex];
+    if (words.length > 0) {
+        let randomIndex = Math.floor(Math.random() * words.length);
+        chosenWord = words[randomIndex];
+    } else {
+        chosenWord = "Error";
+    }
 }
 
 function determineStartingPlayer() {
     let rng;
+    // Safety check if everyone is impostor (rare custom setting)
     if (parseInt(data.impostors) === players.length) {
         rng = Math.floor(Math.random() * players.length);
-        var nameSpan = document.querySelector("#starting-player-name");
-        nameSpan.textContent = players[rng][0];
+        document.querySelector("#starting-player-name").textContent = players[rng][0];
     } else {
         let playerHasBeenChosen = false;
         while (!playerHasBeenChosen) {
             rng = Math.floor(Math.random() * players.length);
             if (players[rng][1] === "Impostor") continue;
-            var nameSpan = document.querySelector("#starting-player-name");
-            nameSpan.textContent = players[rng][0];
+            
+            document.querySelector("#starting-player-name").textContent = players[rng][0];
             playerHasBeenChosen = true;
         }
     }
@@ -259,23 +276,26 @@ function revealResults() {
         textDiv.textContent = translations[currentLang]["the_impostors_were"];
     }
 
-    var div = document.querySelector("#voting-phase-div");
-    div.classList.remove("shown");
+    // --- FIX: Clear the old text immediately so it doesn't show up early ---
+    document.getElementById("result-word").textContent = "";
+    document.getElementById("imp-name").textContent = "";
+    // ---------------------------------------------------------------------
 
-    var resultsDiv = document.querySelector("#results-div");
-    resultsDiv.classList.add("shown");
+    document.querySelector("#voting-phase-div").classList.remove("shown");
+    document.querySelector("#results-div").classList.add("shown");
 
     setTimeout(() => {
         write(chosenWord, "result-word");
 
-
         setTimeout(() => {
             let myString = "";
             let tempImpCount = 0;
+            let totalImps = parseInt(data.impostors);
+
             for (let i = 0; i < players.length; i++) {
                 if (players[i][1] === "Crew") continue;
                 tempImpCount++;
-                if (tempImpCount === parseInt(data.impostors)) {
+                if (tempImpCount === totalImps) {
                     myString += players[i][0];
                 } else {
                     myString += players[i][0] + ", ";
@@ -292,80 +312,54 @@ function revealResults() {
 
 function write(text, elementId) {
     const element = document.getElementById(elementId);
-    if (!element) return; // Safety check
+    if (!element) return; 
 
-    element.textContent = ""; // Clear existing text
+    element.textContent = ""; 
     let i = 0;
-
-    // The cursor character
     const cursor = "|";
 
     function type() {
         if (i < text.length) {
-            // Add the next letter + the cursor
             element.textContent = text.substring(0, i + 1) + cursor;
             i++;
-            // Speed of typing (50ms per letter)
             setTimeout(type, 150);
         } else {
-            // Typing finished. Start the flashing cursor.
             flashCursor(element, text, cursor, 3);
         }
     }
-
     type();
 }
 
 function flashCursor(element, finalText, cursor, times) {
     let count = 0;
     let isVisible = true;
-
     const interval = setInterval(() => {
         if (isVisible) {
-            // Hide cursor (show only text)
             element.textContent = finalText;
         } else {
-            // Show cursor
             element.textContent = finalText + cursor;
         }
-
         isVisible = !isVisible;
         count++;
-
-        // Stop after flashing 'times' amount (multiply by 2 for on/off cycles)
         if (count >= times * 2) {
             clearInterval(interval);
-            element.textContent = finalText; // Ensure it ends clean (no cursor)
+            element.textContent = finalText; 
         }
-    }, 500); // 500ms flash speed (slow)
+    }, 500);
 }
 
 function playAgain() {
     if (busy) return;
     var userAgreed = confirm(translations[currentLang]["play_again_msg"]);
-
     if (userAgreed) {
         window.location.reload();
     }
 }
 
 
+// --- 5. INITIALIZATION ---
 
-
-//INIT
-
-// 1. Safety Check: Ensure data exists before doing anything
-if (!data) {
-    // If no save found, create default dummy data so it doesn't crash
-    data = {
-        players: ["Player 1", "Player 2", "Player 3"],
-        impostors: 1,
-        activeCats: ["Animals"],
-        mode: "Words"
-    };
-}
-
-// 2. Load Language FIRST (so the word is picked in the correct language)
+// Load Language first
 var savedLang = localStorage.getItem('impostorLang');
 if (savedLang) {
     setLanguage(savedLang);
@@ -373,20 +367,19 @@ if (savedLang) {
     setLanguage("en");
 }
 
-// 3. Now run the game logic
+// Run Game Logic
 fillWordCardUnrevealed();
 showUnrevealedCard();
 determineImpostors();
-determineWord(); // Now uses the correct language and correct category list
+determineWord(); // Picks word based on the loaded language
 fillWordCardRevealed();
 determineStartingPlayer();
 
 
-
-//WINDOWS
-
+// --- 6. EXPOSE TO WINDOW (Required for HTML onclick) ---
 window.revealWordCard = revealWordCard;
 window.exit = exit;
 window.nextWordCard = nextWordCard;
 window.revealResults = revealResults;
 window.playAgain = playAgain;
+window.toggleLanguage = toggleLanguage;
