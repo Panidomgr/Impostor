@@ -156,131 +156,411 @@ export const categoriesWords = [
 export const categoriesQuestions = [
     {
         id: "Social",
-        img: "",
-        words: [
-            "EIsai kathisterimenos?"
-        ]
+        img: "", 
+        questions_A: {
+            en: [
+                "How many hours a day are you on Instagram?",
+                "Who is the funniest person in this room?",
+                "What is your favorite thing to do at a party?",
+                "How many people here do you trust 100%?",
+                "Which celebrity would you invite to dinner?"
+            ],
+            gr: [
+                "Πόσες ώρες τη μέρα είσαι στο Instagram;",
+                "Ποιος είναι ο πιο αστείος σε αυτό το δωμάτιο;",
+                "Τι σου αρέσει να κάνεις περισσότερο στα πάρτι;",
+                "Πόσα άτομα εδώ εμπιστεύεσαι 100%;",
+                "Ποιον διάσημο θα καλούσες σε δείπνο;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "How many hours a day do you sleep?",
+                "Who is the easiest target in this room?",
+                "What is your favorite excuse to leave early?",
+                "How many people here do you secretly dislike?",
+                "Which celebrity do you hate the most?"
+            ],
+            gr: [
+                "Πόσες ώρες τη μέρα κοιμάσαι;",
+                "Ποιος είναι ο ευκολότερος στόχος σε αυτό το δωμάτιο;",
+                "Ποια είναι η αγαπημένη σου δικαιολογία για να φύγεις νωρίς;",
+                "Πόσα άτομα εδώ αντιπαθείς κρυφά;",
+                "Ποιον διάσημο μισείς περισσότερο;"
+            ]
+        }
     },
     {
         id: "Time",
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoJP0zrUnyLLLs_d_lyzLpy39JsVZ8r3NYOA&s",
-        words: [
-            "Kathe pote den anapneeis?"
-        ]
+        questions_A: {
+            en: [
+                "What time did you wake up today?",
+                "How many hours did you sleep last night?",
+                "What year were you born?",
+                "How many minutes does it take you to get ready?"
+            ],
+            gr: [
+                "Τι ώρα ξύπνησες σήμερα;",
+                "Πόσες ώρες κοιμήθηκες χθες;",
+                "Ποια χρονιά γεννήθηκες;",
+                "Πόσα λεπτά σου παίρνει να ετοιμαστείς;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "What time did you go to bed?",
+                "How many hours do you spend on your phone?",
+                "What year do you wish you were born?",
+                "How many minutes can you hold your breath (x10)?"
+            ],
+            gr: [
+                "Τι ώρα πήγες για ύπνο;",
+                "Πόσες ώρες ξοδεύεις στο κινητό σου;",
+                "Ποια χρονιά ευχόσουν να είχες γεννηθεί;",
+                "Πόσα λεπτά μπορείς να κρατήσεις την αναπνοή σου (x10);"
+            ]
+        }
+    },
+    {
+        id: "Travel",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859953/map_xqseag.jpg",
+        questions_A: {
+            en: [
+                "Which country did you visit last?",
+                "What is your favorite city?",
+                "Where do you want to go for your honeymoon?",
+                "How many countries have you visited?"
+            ],
+            gr: [
+                "Ποια χώρα επισκέφτηκες τελευταία;",
+                "Ποια είναι η αγαπημένη σου πόλη;",
+                "Πού θες να πας για ταξίδι του μέλιτος;",
+                "Πόσες χώρες έχεις επισκεφτεί;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "Which country do you hate the most?",
+                "What is the weirdest capital name you know?",
+                "Where does your favorite singer come from?",
+                "How many Asian countries do you think you can name?"
+            ],
+            gr: [
+                "Ποια χώρα αντιπαθείς περισσότερο;",
+                "Ποιο είναι το πιο περίεργο όνομα πρωτεύουσας που ξέρεις;",
+                "Από πού είναι ο αγαπημένος σου τραγουδιστής;",
+                "Πόσες Ασιάτικες χώρες νομίζεις πως μπορείς να ονομάσεις;"
+            ]
+        }
+    },
+    {
+        id: "Food",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859958/food_xhtonq.png",
+        questions_A: {
+            en: [
+                "What is your favorite fruit?",
+                "What did you eat for breakfast?",
+                "Which vegetable do you hate?",
+                "How many liters of water do you drink a day?"
+            ],
+            gr: [
+                "Ποιο είναι το αγαπημένο σου φρούτο;",
+                "Τι έφαγες για πρωινό;",
+                "Ποιο λαχανικό σιχαίνεσαι;",
+                "Πόσα λίτρα νερό πίνεις τη μέρα;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "What is your favorite vegetable?",
+                "What is your favorite dessert?",
+                "Name a green vegetable.",
+                "How many coffees do you drink a day?"
+            ],
+            gr: [
+                "Ποιο είναι το αγαπημένο σου λαχανικό;",
+                "Ποιο είναι το αγαπημένο σου γλυκό;",
+                "Ονόμασε ένα πράσινο λαχανικό.",
+                "Πόσους καφέδες πίνεις τη μέρα;"
+            ]
+        }
+    },
+    {
+        id: "Childhood",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766860317/home_wh3zwh.jpg",
+        questions_A: {
+            en: [
+                "What was the name of your first pet?",
+                "What was your favorite cartoon?",
+                "Who was your favorite teacher?",
+                "At what age did you learn to ride a bike?"
+            ],
+            gr: [
+                "Ποιο ήταν το όνομα του πρώτου σου κατοικιδίου;",
+                "Ποιο ήταν το αγαπημένο σου παιδικό;",
+                "Ποιος ήταν ο αγαπημένος σου δάσκαλος;",
+                "Σε ποια ηλικία έμαθες ποδήλατο;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "What is your mother's name?",
+                "What is the worst animated movie you've seen?",
+                "Who is your least favourite teacher?",
+                "At what age did you hit puberty?"
+            ],
+            gr: [
+                "Ποιο είναι το όνομα της μητέρας σου;",
+                "Ποια είναι η χειρότερη ταινία κινουμένων σχεδίων που έχεις δει;",
+                "Ποιος είναι ο λιγότερο αγαπημένος σου δάσκαλος;",
+                "Σε ποια ηλικία μπήκες στην εφηβεία;"
+            ]
+        }
+    },
+    {
+        id: "Habits",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859954/body_pjdiw6.png",
+        questions_A: {
+            en: [
+                "How often do you shower?",
+                "What color is your toothbrush?",
+                "What brand is your phone?",
+                "How many times a week do you work out?"
+            ],
+            gr: [
+                "Κάθε πότε κάνεις μπάνιο;",
+                "Τι χρώμα είναι η οδοντόβουρτσά σου;",
+                "Τι μάρκα είναι το κινητό σου;",
+                "Πόσες φορές τη βδομάδα γυμνάζεσαι;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "How often do you brush your teeth?",
+                "What is your favorite color?",
+                "What brand are your shoes?",
+                "How many times a week do you order food?"
+            ],
+            gr: [
+                "Κάθε πότε πλένεις τα δόντια σου;",
+                "Ποιο είναι το αγαπημένο σου χρώμα;",
+                "Τι μάρκα είναι τα παπούτσια σου;",
+                "Πόσες φορές τη βδομάδα παραγγέλνεις φαγητό;"
+            ]
+        }
+    },
+    {
+        id: "Crime",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859960/horror_s6zczh.jpg",
+        questions_A: {
+            en: [
+                "Have you ever stolen something?",
+                "Have you ever been in a fight?",
+                "How many times have you lied today?",
+                "Where would you hide a body?"
+            ],
+            gr: [
+                "Έχεις κλέψει ποτέ κάτι;",
+                "Έχεις μπλέξει ποτέ σε καβγά;",
+                "Πόσες φορές είπες ψέματα σήμερα;",
+                "Πού θα έκρυβες ένα πτώμα;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "Have you ever been arrested?",
+                "Have you ever fired a gun?",
+                "How many times have you been to the hospital?",
+                "Where is the best place to hide money?"
+            ],
+            gr: [
+                "Σε έχουν συλλάβει ποτέ;",
+                "Έχεις πυροβολήσει ποτέ;",
+                "Πόσες φορές έχεις πάει νοσοκομείο;",
+                "Ποια είναι η καλύτερη κρυψώνα για λεφτά;"
+            ]
+        }
+    },
+    {
+        id: "Money",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859957/countries_bieyz5.png",
+        questions_A: {
+            en: [
+                "How much money do you have in your wallet?",
+                "What is the most expensive thing you own?",
+                "How much would you pay to go to space?",
+                "Who owes you money?"
+            ],
+            gr: [
+                "Πόσα λεφτά έχεις στο πορτοφόλι σου;",
+                "Ποιο είναι το πιο ακριβό πράγμα που έχεις;",
+                "Πόσα θα πλήρωνες για να πας στο διάστημα;",
+                "Ποιος σου χρωστάει λεφτά;"
+            ]
+        },
+        questions_B: {
+            en: [
+                "How much money did you spend today?",
+                "What do you want to buy next?",
+                "How much is your dream car?",
+                "Who do you owe money to?"
+            ],
+            gr: [
+                "Πόσα λεφτά ξόδεψες σήμερα;",
+                "Τι θέλεις να αγοράσεις μετά;",
+                "Πόσο κάνει το αμάξι των ονείρων σου;",
+                "Σε ποιον χρωστάς λεφτά;"
+            ]
+        }
     }
 ];
 
 export const translations = {
     en: {
-            //-- Menu Page
-        menu_page_title:    "Menu - Impostor",
-        title:              "IMPOSTOR",
-        categories:         "Categories",
-        words:              "Words",
-        questions:          "Questions",
-        players:            "Players",
-        impostors:          "Impostors:",
-        play:               "PLAY",
-        placeholder_name:   "Player Name",
+        //-- Menu Page
+        menu_page_title: "Menu - Impostor",
+        title: "IMPOSTOR",
+        categories: "Categories",
+        words: "Words",
+        questions: "Questions",
+        players: "Players",
+        impostors: "Impostors:",
+        play: "PLAY",
+        placeholder_name: "Player Name",
 
-            //-- Game Page
-        game_page_title:    "Game - Impostor",
-        exit:               "EXIT",
-        tap_to_reveal:      "Tap to Reveal",
-        find_the_impostor:  "Find the Impostor",
+        //-- Game Page
+        game_page_title: "Game - Impostor",
+        exit: "EXIT",
+        tap_to_reveal: "Tap to Reveal",
+        find_the_impostor: "Find the Impostor",
         youre_the_impostor: "You're the Impostor!",
-        starting_player:    "Starting Player: ",
-        reveal_results:     "Reveal Results",
-        the_impostor_was:   "The Impostor was: ",
+        starting_player: "Starting Player: ",
+        reveal_results: "Reveal Results",
+        the_impostor_was: "The Impostor was: ",
         the_impostors_were: "The Impostors were: ",
-        the_word_was:       "The word was: ",
-        play_again:         "Play Again?",
-        
-            //-- Categories
-        Animals:    "Animals",
-        Food:       "Food",
-        Jobs:       "Jobs",
-        Places:     "Places",
-        Objects:    "Objects",
-        Transport:  "Transport",
-        Sports:     "Sports",
-        Clothes:    "Clothes",
+        the_word_was: "The word was: ",
+        play_again: "Play Again?",
+
+        //-- Categories - Words
+        Animals: "Animals",
+        Food: "Food",
+        Jobs: "Jobs",
+        Places: "Places",
+        Objects: "Objects",
+        Transport: "Transport",
+        Sports: "Sports",
+        Clothes: "Clothes",
         Technology: "Technology",
-        Countries:  "Countries",
-        Nature:     "Nature",
-        Superheroes:"Superheroes",
-        Music:      "Music",
-        Home:       "Home",
-        Space:      "Space",
-        Body:       "Body",
-        Games:      "Games",
-        Horror:     "Horror",
-        Brands:     "Brands",
+        Countries: "Countries",
+        Nature: "Nature",
+        Superheroes: "Superheroes",
+        Music: "Music",
+        Home: "Home",
+        Space: "Space",
+        Body: "Body",
+        Games: "Games",
+        Horror: "Horror",
+        Brands: "Brands",
 
-            //-- Image Alts
-        alt_logo:   "Game Logo",
-        alt_crew:   "Crewmate Icon",
-        alt_imp:    "Impostor Icon",
-        alt_lang:   "Switch Language",
+        //-- Categories - Questions
+        Social: "Social",
+        Time: "Time",
+        Travel: "Travel",
+        Food: "Food",
+        Childhood: "Childhood",
+        Habits: "Habits",
+        Crime: "Crime",
+        Money: "Money",
 
-            //-- Confirm Messages
-        exit_msg:       "Are you sure you want to leave?",
+        //-- Questions Mode
+        impostor: "Impostor",
+        reveal_impostor: "Reveal the Impostor",
+        reveal_impostors: "Reveal the Impostors",
+        submit: "SUBMIT",
+        answer_placeholder: "Type your answer here...",
+
+        //-- Image Alts
+        alt_logo: "Game Logo",
+        alt_crew: "Crewmate Icon",
+        alt_imp: "Impostor Icon",
+        alt_lang: "Switch Language",
+
+        //-- Confirm Messages
+        exit_msg: "Are you sure you want to leave?",
         play_again_msg: "Are you sure you want to play again?"
     },
     gr: {
-            //-- Menu Page
-        menu_page_title:    "Μενού - Αγύρτης",
-        title:              "ΑΓΥΡΤΗΣ",
-        categories:         "Κατηγορίες",
-        words:              "Λέξεις",
-        questions:          "Ερωτήσεις",
-        players:            "Παίκτες",
-        impostors:          "Αγύρτες:",
-        play:               "ΠΑΙΞΤΕ",
-        placeholder_name:   "Όνομα Παίκτη",
+        //-- Menu Page
+        menu_page_title: "Μενού - Αγύρτης",
+        title: "ΑΓΥΡΤΗΣ",
+        categories: "Κατηγορίες",
+        words: "Λέξεις",
+        questions: "Ερωτήσεις",
+        players: "Παίκτες",
+        impostors: "Αγύρτες:",
+        play: "ΠΑΙΞΤΕ",
+        placeholder_name: "Όνομα Παίκτη",
 
-            //-- Game Page
-        game_page_title:    "Παιχνίδι - Αγύρτης",
-        exit:               "ΈΞΟΔΟΣ",
-        tap_to_reveal:      "Πάτα να δεις",
-        find_the_impostor:  "Βρες τον Αγύρτη",
+        //-- Game Page
+        game_page_title: "Παιχνίδι - Αγύρτης",
+        exit: "ΈΞΟΔΟΣ",
+        tap_to_reveal: "Πάτα να δεις",
+        find_the_impostor: "Βρες τον Αγύρτη",
         youre_the_impostor: "Είσαι ο Αγύρτης!",
-        starting_player:    "Πρώτος Παίκτης: ",
-        reveal_results:     "Αποτελέσματα",
-        the_impostor_was:   "Ο Αγύρτης ήταν ο/η: ",
+        starting_player: "Πρώτος Παίκτης: ",
+        reveal_results: "Αποτελέσματα",
+        the_impostor_was: "Ο Αγύρτης ήταν ο/η: ",
         the_impostors_were: "Οι αγύρτες ήταν οι: ",
-        the_word_was:       "Η λέξη ήταν: ",
-        play_again:         "Παίξτε Ξανά;",
-        
-            //-- Categories
-        Animals:    "Ζώα",
-        Food:       "Φαγητό",
-        Jobs:       "Επαγγέλματα",
-        Places:     "Τοποθεσίες",
-        Objects:    "Αντικείμενα",
-        Transport:  "Μεταφορικά",
-        Sports:     "Αθλήματα",
-        Clothes:    "Ρούχα",
+        the_word_was: "Η λέξη ήταν: ",
+        play_again: "Παίξτε Ξανά;",
+
+        //-- Categories
+        Animals: "Ζώα",
+        Food: "Φαγητό",
+        Jobs: "Επαγγέλματα",
+        Places: "Τοποθεσίες",
+        Objects: "Αντικείμενα",
+        Transport: "Μεταφορικά",
+        Sports: "Αθλήματα",
+        Clothes: "Ρούχα",
         Technology: "Τεχνολογία",
-        Countries:  "Χώρες",
-        Nature:     "Φύση",
-        Superheroes:"Υπερήρωες",
-        Music:      "Μουσική",
-        Home:       "Σπίτι",
-        Space:      "Διάστημα",
-        Body:       "Σώμα",
-        Games:      "Παιχνίδια",
-        Horror:     "Τρόμος",
-        Brands:     "Μάρκες",
+        Countries: "Χώρες",
+        Nature: "Φύση",
+        Superheroes: "Υπερήρωες",
+        Music: "Μουσική",
+        Home: "Σπίτι",
+        Space: "Διάστημα",
+        Body: "Σώμα",
+        Games: "Παιχνίδια",
+        Horror: "Τρόμος",
+        Brands: "Μάρκες",
 
-            //-- Image Alts
-        alt_logo:   "Λογότυπο Παιχνιδιού",
-        alt_crew:   "Εικονίδιο Πληρώματος",
-        alt_imp:    "Εικονίδιο Αγύρτη",
-        alt_lang:   "Αλλαγή Γλώσσας",
+        //-- Categories - Questions
+        Social: "Κοινωνικά",
+        Time: "Χρόνος",
+        Travel: "Ταξίδια",
+        Food: "Φαγητό",
+        Childhood: "Παιδικά Χρόνια",
+        Habits: "Συνήθειες",
+        Crime: "Έγκλημα",
+        Money: "Λεφτά",
 
-            //-- Confirm Messages
-        exit_msg:       "Είσαι σίγουρος ότι θέλεις να φύγεις;",
+        //-- Questions Mode
+        impostor: "Αγύρτης",
+        reveal_impostor: "Αποκάλυψε τον Αγύρτη",
+        reveal_impostors: "Αποκάλυψε τους Αγύρτες",
+        submit: "ΥΠΟΒΟΛΗ",
+        answer_placeholder: "Γράψε την απάντησή σου...",
+
+        //-- Image Alts
+        alt_logo: "Λογότυπο Παιχνιδιού",
+        alt_crew: "Εικονίδιο Πληρώματος",
+        alt_imp: "Εικονίδιο Αγύρτη",
+        alt_lang: "Αλλαγή Γλώσσας",
+
+        //-- Confirm Messages
+        exit_msg: "Είσαι σίγουρος ότι θέλεις να φύγεις;",
         play_again_msg: "Είσαι σίγουρος ότι θέλεις να παίξεις ξανά;"
     }
 };
