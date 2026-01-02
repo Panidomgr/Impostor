@@ -180,12 +180,12 @@ function getImpostorsNumber(input) {
 
 
 function toggleGameMode() {
-    if (currentLang === "en") {
-        alert("Questions coming soon!");
-    } else {
-        alert("Ερωτήσεις έρχονται σύντομα!")
-    }
-    return;
+    // if (currentLang === "en") {
+    //     alert("Questions coming soon!");
+    // } else {
+    //     alert("Ερωτήσεις έρχονται σύντομα!")
+    // }
+    // return;
 
     var gameModes = document.getElementsByClassName('game-mode');
     Array.from(gameModes).forEach((gameMode, index) => {
