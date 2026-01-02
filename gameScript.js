@@ -20,6 +20,8 @@ if (!data.players || data.players.length === 0) {
     data.players = ["Player 1", "Player 2", "Player 3"];
 }
 
+// console.log("Data: ", data);
+
 // --- 2. GAME VARIABLES ---
 var playerIndex = 0;
 // Structure: [ ["Name", "Role"], ["Name", "Role"] ]
@@ -28,6 +30,14 @@ let busy = false;
 var words = [];
 var chosenWord = "";
 var currentLang = "en"; // Default
+
+const ImpLogoSrc = "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/imp_tucedk.png";
+
+// Question Game Global Variable
+var crewQ = "";
+var impQ = "";
+var myPlayersQ = [];
+var myAnswerDivs = [];
 
 // DOM Elements
 var unrevealed = document.getElementById('unrevealed');
@@ -57,6 +67,14 @@ function setLanguage(lang) {
         input.placeholder = translations[lang]["placeholder_name"];
     });
 
+    const placers = document.querySelectorAll('[data-lang-placeholder]');
+    placers.forEach(el => {
+        const key = el.getAttribute('data-lang-placeholder');
+        if (translations[lang][key]) {
+            el.placeholder = translations[lang][key];
+        }
+    });
+
     // D. Update Image Alts
     const images = document.querySelectorAll('[data-lang-alt]');
     images.forEach(img => {
@@ -77,38 +95,80 @@ function toggleLanguage() {
     // 1. Update all standard UI elements (Buttons, Headers, etc.)
     setLanguage(newLang);
 
-    // 2. Find and Translate the Active Game Word
-    // Combine both lists so we search everywhere
-    const allCats = [...categoriesWords, ...categoriesQuestions];
+    // --- GAME MODE: WORDS ---
+    if (data.mode === "Words") {
+        const allCats = categoriesWords;
 
-    for (const cat of allCats) {
-        // Safety Check: Ensure this category has lists for both languages
-        if (cat.words && cat.words[oldLang] && cat.words[newLang]) {
-            
-            // Try to find the current chosenWord in the OLD language list
-            const index = cat.words[oldLang].indexOf(chosenWord);
+        for (const cat of allCats) {
+            if (cat.words && cat.words[oldLang] && cat.words[newLang]) {
+                const index = cat.words[oldLang].indexOf(chosenWord);
+                if (index !== -1) {
+                    const translatedWord = cat.words[newLang][index];
+                    if (translatedWord) {
+                        chosenWord = translatedWord;
+                        
+                        // Update DOM Elements
+                        const wordDiv = document.querySelector("#word");
+                        if (wordDiv) wordDiv.textContent = chosenWord;
 
-            if (index !== -1) {
-                // Found it! Get the corresponding word from the NEW language list
-                const translatedWord = cat.words[newLang][index];
-
-                // If a translation exists, update the game state
-                if (translatedWord) {
-                    chosenWord = translatedWord;
-
-                    // Update the text on the revealed card immediately
-                    const wordDiv = document.querySelector("#word");
-                    if (wordDiv) wordDiv.textContent = chosenWord;
-
-                    // Update the results screen if the game is already over
-                    const resultWordDiv = document.querySelector("#result-word");
-                    if (resultWordDiv) resultWordDiv.textContent = chosenWord;
+                        const resultWordDiv = document.querySelector("#result-word");
+                        if (resultWordDiv) resultWordDiv.textContent = chosenWord;
+                    }
+                    break; 
                 }
-                
-                // We found our match, no need to keep checking other categories
-                break; 
             }
         }
+    } 
+    
+    // --- GAME MODE: QUESTIONS ---
+    else {
+        // We need to find the current crewQ in the database to get the index
+        for (const cat of categoriesQuestions) {
+            if (cat.questions_A && cat.questions_A[oldLang]) {
+                
+                // Case 1: Crew Question is from List A
+                let idx = cat.questions_A[oldLang].indexOf(crewQ);
+                if (idx !== -1) {
+                    crewQ = cat.questions_A[newLang][idx];
+                    impQ = cat.questions_B[newLang][idx];
+                    break;
+                }
+
+                // Case 2: Crew Question is from List B
+                idx = cat.questions_B[oldLang].indexOf(crewQ);
+                if (idx !== -1) {
+                    crewQ = cat.questions_B[newLang][idx];
+                    impQ = cat.questions_A[newLang][idx];
+                    break;
+                }
+            }
+        }
+
+        // Update the global Players Array so future turns use the new language
+        for (let i = 0; i < myPlayersQ.length; i++) {
+            if (myPlayersQ[i][1] === "Impostor") {
+                myPlayersQ[i][2] = impQ;
+            } else {
+                myPlayersQ[i][2] = crewQ;
+            }
+        }
+
+        // Update DOM: Current Active Question Card (if visible)
+        let qDiv = document.getElementById('question');
+        let card = document.getElementById("question-card");
+        if (card.classList.contains('shown') && myPlayersQ[playerIndex]) {
+             qDiv.textContent = myPlayersQ[playerIndex][2];
+        }
+
+        // Update DOM: Results Screen (Header)
+        let resQDiv = document.getElementById('results-question');
+        if (resQDiv) resQDiv.textContent = crewQ;
+
+        // Update DOM: Results Screen (Impostor Questions in list)
+        let impQDivs = document.querySelectorAll('.results-impostor-question');
+        impQDivs.forEach(div => {
+            div.textContent = impQ;
+        });
     }
 }
 
@@ -133,7 +193,7 @@ function showUnrevealedCard() {
     if (busy) return;
     busy = true;
 
-    var card = document.querySelector("#unrevealed");
+    var card = (data.mode === "Words") ? document.querySelector("#unrevealed") : document.querySelector("#unrevealed-q");
     if (!card.classList.contains("shown")) {
         card.classList.add("shown");
     }
@@ -212,8 +272,8 @@ function determineWord() {
     for (let i = 0; i < data.activeCats.length; i++) {
         let cat = myCats.find(cat => cat.id === data.activeCats[i]);
         // This picks the word list based on the CURRENT language at start
-        let wordList = cat.words[currentLang]; 
-        
+        let wordList = cat.words[currentLang];
+
         if (wordList) {
             wordList.forEach((word) => {
                 if (!words.includes(word)) {
@@ -242,7 +302,7 @@ function determineStartingPlayer() {
         while (!playerHasBeenChosen) {
             rng = Math.floor(Math.random() * players.length);
             if (players[rng][1] === "Impostor") continue;
-            
+
             document.querySelector("#starting-player-name").textContent = players[rng][0];
             playerHasBeenChosen = true;
         }
@@ -312,9 +372,9 @@ function revealResults() {
 
 function write(text, elementId) {
     const element = document.getElementById(elementId);
-    if (!element) return; 
+    if (!element) return;
 
-    element.textContent = ""; 
+    element.textContent = "";
     let i = 0;
     const cursor = "|";
 
@@ -343,7 +403,7 @@ function flashCursor(element, finalText, cursor, times) {
         count++;
         if (count >= times * 2) {
             clearInterval(interval);
-            element.textContent = finalText; 
+            element.textContent = finalText;
         }
     }, 500);
 }
@@ -357,6 +417,279 @@ function playAgain() {
 }
 
 
+
+
+//      QUESTION GAME BITCHES
+
+function fillAndShowUnrevealedQuestionCard() {
+    if (busy) return;
+    busy = true;
+
+    let nameDiv = document.getElementById("player-name-q");
+    nameDiv.textContent = myPlayersQ[playerIndex][0];
+
+    let qCard = document.getElementById('question-card');
+    qCard.classList.remove('shown');
+
+    let card = document.getElementById("unrevealed-q");
+    if (!card.classList.contains('shown')) card.classList.add("shown");
+
+    fillQuestionCard();
+
+    setTimeout(() => {
+        busy = false;
+    }, 1000);
+}
+
+function fillQuestionCard() {
+    let qDiv = document.getElementById('question');
+    qDiv.textContent = myPlayersQ[playerIndex][2];
+
+    let a = document.getElementById('answer');
+    a.value = "";
+}
+
+function revealQuestionCard() {
+    if (busy) return;
+    busy = true;
+
+    let unrevealed = document.getElementById("unrevealed-q")
+    unrevealed.classList.remove('shown');
+
+    let card = document.getElementById("question-card");
+    if (!card.classList.contains('shown')) card.classList.add('shown');
+
+    setTimeout(() => {
+        busy = false;
+    }, 1000);
+}
+
+function determineQuestions() {
+    let rng = Math.floor(Math.random() * data.activeCats.length);
+    let currentCat = data.activeCats[rng];
+    let myCat = categoriesQuestions.find(cat => cat.id === currentCat);
+    let qAmount = myCat.questions_A.en.length;
+    let qIndex = Math.floor(Math.random() * qAmount);
+    rng = Math.random();
+    if (rng > 0.5) {
+        crewQ = myCat.questions_A[currentLang][qIndex];
+        impQ = myCat.questions_B[currentLang][qIndex];
+    } else {
+        crewQ = myCat.questions_B[currentLang][qIndex];
+        impQ = myCat.questions_A[currentLang][qIndex];
+    }
+}
+
+function getPlayersQuestionArray() {
+    myPlayersQ = [];
+
+    for (let i = 0; i < players.length; i++) {
+        let name = players[i][0];
+        let role = players[i][1];
+        let assignedQuestion = (role === "Impostor") ? impQ : crewQ;
+        let answer = "";
+
+        myPlayersQ.push([name, role, assignedQuestion, answer]);
+    }
+
+    // console.log("Players: ", myPlayersQ);
+}
+
+function nextQuestionCard() {
+    if (busy) return;
+
+    let answerDiv = document.getElementById('answer');
+    let answer = answerDiv.value;
+    myPlayersQ[playerIndex][3] = answer;
+
+    playerIndex++;
+
+    if (playerIndex < data.players.length) {
+        fillAndShowUnrevealedQuestionCard();
+
+        setTimeout(() => {
+            busy = false;
+        }, 1000);
+    } else {
+        resultsQ();
+
+        setTimeout(() => {
+            busy = false;
+        }, 5000);
+    }
+}
+
+function makeQCard() {
+    const div1 = document.createElement(`div`);
+    div1.classList.add('results-q-answer-card');
+
+    const div2 = document.createElement(`div`);
+    div2.classList.add('results-index-container');
+    div1.appendChild(div2);
+
+    const div3 = document.createElement(`div`);
+    div3.classList.add('results-index');
+    div3.textContent = playerIndex + 1;
+    div2.appendChild(div3);
+
+    const img = document.createElement(`img`);
+    img.classList.add('results-impostor-logo');
+    img.src = ImpLogoSrc;
+    img.alt = "Impostor-Logo";
+    img.draggable = false;
+    img.setAttribute('data-lang-alt', "alt_imp");
+    div2.appendChild(img);
+
+    const div4 = document.createElement(`div`);
+    div1.appendChild(div4);
+
+    const div5 = document.createElement(`div`);
+    div5.classList.add('results-name-container');
+    div4.appendChild(div5);
+
+    const div6 = document.createElement(`div`);
+    div6.classList.add('results-name');
+    div6.textContent = myPlayersQ[playerIndex][0];
+    div5.appendChild(div6);
+
+    const div7 = document.createElement(`div`);
+    div7.classList.add('results-impostor');
+    div7.setAttribute('data-lang', "impostor");
+    div7.textContent = translations[currentLang]["impostor"]
+    div5.appendChild(div7);
+
+    const div8 = document.createElement(`div`);
+    div8.classList.add('results-answer-container');
+    div4.appendChild(div8);
+
+    const div9 = document.createElement(`div`);
+    div9.classList.add('results-answer');
+    div9.textContent = myPlayersQ[playerIndex][3];
+    div8.appendChild(div9);
+
+    const div10 = document.createElement(`div`);
+    div10.classList.add('results-impostor-question');
+    div10.setAttribute('data-lang', "results-impostor-question");
+    if (myPlayersQ[playerIndex][1] === "Impostor") {
+        div10.textContent = myPlayersQ[playerIndex][2];
+    }
+    div8.appendChild(div10);
+
+    let box = document.getElementById('answers');
+    box.appendChild(div1);
+    myAnswerDivs.push(div1);
+
+    playerIndex++;
+}
+
+function fillAnswersQ() {
+    playerIndex = 0;
+    myAnswerDivs = [];
+    let box = document.getElementById('answers');
+    box.innerHTML = '';
+
+    for (let i = 0; i < myPlayersQ.length; i++) {
+        makeQCard();
+    }
+
+    //Changing Data Lang Attribute for the amount of Impostors:
+    let btn = document.getElementById('results-q-btn');
+    if (data.impostors > 1) {
+        btn.setAttribute('data-lang', "reveal_impostors");
+        btn.textContent = translations[currentLang]["reveal_impostors"];
+    } else {
+        btn.setAttribute('data-lang', "reveal_impostor");
+        btn.textContent = translations[currentLang]["reveal_impostor"];
+    }
+}
+
+function fillResultsCardQ() {
+    let qDiv = document.getElementById('results-question');
+    qDiv.textContent = crewQ;
+
+    fillAnswersQ();
+}
+
+function resultsQ() {
+    if (busy) return;
+    busy = true;
+
+    fillResultsCardQ();
+
+    let lastCard = document.getElementById('question-card');
+    lastCard.classList.remove('shown');
+
+    let resultsDiv = document.getElementById("results-q");
+    if (!resultsDiv.classList.contains('shown')) resultsDiv.classList.add('shown');
+
+    setTimeout(() => {
+        busy = false;
+    }, 5000);
+}
+
+function revealImpostorsQ() {
+    if (busy) return;
+    busy = true;
+
+    playerIndex = 0;
+
+    for (let i = 0; i < myAnswerDivs.length; i++) {
+        if (myPlayersQ[playerIndex++][1] === "Crew") continue;
+        myAnswerDivs[i].classList.add('impostor');
+    }
+
+    let btn = document.getElementById('results-q-btn');
+    btn.setAttribute('data-lang', "play_again");
+    btn.textContent = translations[currentLang]["play_again"];
+    btn.onclick = () => {
+        playAgain();
+    }
+
+    setTimeout(() => {
+        busy = false;
+    }, 5000);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // --- 5. INITIALIZATION ---
 
 // Load Language first
@@ -368,12 +701,22 @@ if (savedLang) {
 }
 
 // Run Game Logic
-fillWordCardUnrevealed();
-showUnrevealedCard();
 determineImpostors();
-determineWord(); // Picks word based on the loaded language
-fillWordCardRevealed();
-determineStartingPlayer();
+if (data.mode === "Words") {
+    fillWordCardUnrevealed();
+    showUnrevealedCard();
+    determineWord(); // Picks word based on the loaded language
+    fillWordCardRevealed();
+    determineStartingPlayer();
+} else {
+    determineQuestions();
+    getPlayersQuestionArray();
+    fillAndShowUnrevealedQuestionCard();
+}
+
+
+
+
 
 
 // --- 6. EXPOSE TO WINDOW (Required for HTML onclick) ---
@@ -383,3 +726,6 @@ window.nextWordCard = nextWordCard;
 window.revealResults = revealResults;
 window.playAgain = playAgain;
 window.toggleLanguage = toggleLanguage;
+window.revealQuestionCard = revealQuestionCard;
+window.nextQuestionCard = nextQuestionCard;
+window.revealImpostorsQ = revealImpostorsQ;
