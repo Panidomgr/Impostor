@@ -23,7 +23,8 @@
         </div>
     </header>
     <main>
-        <div class="word-card" id="unrevealed" onclick="revealWordCard();">
+        <!-- WORD GAME -->
+        <div class="card" id="unrevealed" onclick="revealWordCard();">
             <div id="player-name">
 
             </div>
@@ -32,13 +33,13 @@
                 alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
             <div data-lang="tap_to_reveal"></div>
         </div>
-        <div class="word-card" id="revealed-crew" onclick="nextWordCard();">
+        <div class="card" id="revealed-crew" onclick="nextWordCard();">
             <div id="description" data-lang="find_the_impostor"></div>
             <div id="word">Teo</div>
             <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/crew_r2b0xi.png"
                 alt="Crew-Logo" draggable="false" data-lang-alt="alt_crew">
         </div>
-        <div class="word-card" id="revealed-imp" onclick="nextWordCard();">
+        <div class="card" id="revealed-imp" onclick="nextWordCard();">
             <div id="description" data-lang="youre_the_impostor"></div>
             <img src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/imp_tucedk.png"
                 alt="Impostor-Logo" draggable="false" data-lang-alt="alt_imp">
@@ -62,6 +63,31 @@
                 <div id="result-word"></div>
             </div>
             <div id="play-again-button" onclick="playAgain();" data-lang="play_again"></div>
+        </div>
+
+        <!-- QUESTION GAME -->
+        <div class="card" id="unrevealed-q" onclick="revealQuestionCard();">
+            <div id="player-name-q">
+
+            </div>
+            <img class="logo"
+                src="https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766804156/logo_uqka4l.png"
+                alt="Game-Logo" draggable="false" data-lang-alt="alt_logo">
+            <div data-lang="tap_to_reveal"></div>
+        </div>
+        <div id="question-card">
+            <div id="question">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni quo iusto eos impedit
+                recusandae voluptatum ea vero reiciendis quisquam deleniti tenetur doloremque autem optio in unde, non
+                labore, magnam doloribus!</div>
+            <textarea id="answer" data-lang-placeholder="answer_placeholder"></textarea>
+            <div id="submit-btn" onclick="nextQuestionCard();" data-lang="submit">SUBMIT</div>
+        </div>
+        <div id="results-q">
+            <div id="results-question">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora maxime
+                cupiditate accusantium eos numquam. Ex sequi expedita aspernatur laborum, laboriosam itaque quisquam.
+                Molestiae delectus recusandae incidunt harum beatae ex quisquam.</div>
+            <div id="answers"></div>
+            <div id="results-q-btn" data-lang="" onclick="revealImpostorsQ();"></div>
         </div>
     </main>
 </body>
