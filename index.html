@@ -41,7 +41,11 @@
             <div class="main-page-button" onclick="openPlayersTab()" data-lang="players"></div>
             <div class="main-page-button non-interactible" id="impostors-count-box">
                 <div data-lang="impostors"></div>
-                <input value="1" max="10" min="0" type="number" class="" onchange="getImpostorsNumber(this)">
+                <input value="1" max="20" min="0" type="number" class="" onchange="getImpostorsNumber(this)">
+            </div>
+            <div id="word-settings" class="main-page-button non-interactible">
+                <div id="category-setting" data-lang="category_setting" onclick="toggleCatSetting(this);"></div>
+                <div id="random-imp-setting" data-lang="random_imp_setting" onclick="toggleRNGSetting(this);"></div>
             </div>
         </div>
         <div id="main-page-players-box">
