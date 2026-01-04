@@ -7,11 +7,14 @@ body {
     margin: 0;
     background-color: var(--bg);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    gap: 50px;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
     padding-bottom: 50px;
+    max-height: 100vh;
+    overflow: hidden;
 }
 
 
@@ -26,7 +29,9 @@ body {
     --red: #f43f5e;
     --light-red: #e95870;
     --green: #4ade80;
+    --light-green: #6ffea3;
     --purple: #c084fc;
+    --dark-purple: #ae6af3;
     --light-purple: #cca5f3;
     --gray: #94a3b8;
     --text: #f8fafc;
@@ -58,7 +63,9 @@ body {
 
 .main-page-button {
     border: 5px solid var(--bg-2);
-    width: 450px;
+    max-width: 450px;
+    width: fit-content;
+    min-width: 350px;
     aspect-ratio: 3/1;
     background-color: var(--purple);
     border-radius: 15%;
@@ -80,7 +87,6 @@ body {
 
 #main-page-box {
     display: flex;
-    grid-template-columns: 1fr 1fr;
     gap: 50px;
     flex-wrap: wrap;
     max-width: 100%;
@@ -93,13 +99,14 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding: 50px;
+    padding: 5px;
 }
 
 header {
     width: 100%;
     padding: 20px 10px;
-    position: relative; /* Needed for absolute positioning the lang button */
+    position: relative;
+    /* Needed for absolute positioning the lang button */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,32 +117,37 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Space between images and text */
+    gap: 15px;
+    /* Space between images and text */
     width: 100%;
     max-width: 800px;
 }
 
 .header-icon {
-    width: 60px; /* Default size */
+    width: 60px;
+    /* Default size */
     height: auto;
-    filter: drop-shadow(0 0 5px var(--blue)); /* Blue glow for images */
+    filter: drop-shadow(0 0 5px var(--blue));
+    /* Blue glow for images */
     transition: transform 0.3s ease;
 }
 
 .game-title {
     margin: 0;
-    font-size: clamp(2rem, 8vw, 5em); /* Dynamic sizing: Min 2rem, Max 5em */
+    font-size: clamp(2rem, 8vw, 5em);
+    /* Dynamic sizing: Min 2rem, Max 5em */
     color: var(--text);
     text-transform: uppercase;
-    letter-spacing: 5px; /* Cinematic spacing */
+    letter-spacing: 5px;
+    /* Cinematic spacing */
     text-align: center;
-    
+
     /* The "Impostor" Vibe: Red/Purple Shadow stack */
-    text-shadow: 
+    text-shadow:
         3px 3px 0px var(--dark-red),
         6px 6px 0px var(--bg-2),
         0 0 20px var(--red);
-    
+
     /* Animation */
     animation: floating 3s ease-in-out infinite;
 }
@@ -144,7 +156,8 @@ header {
     position: absolute;
     right: 20px;
     top: 50%;
-    transform: translateY(-50%); /* Center vertically */
+    transform: translateY(-50%);
+    /* Center vertically */
 }
 
 .lang-switch-wrapper img {
@@ -160,9 +173,17 @@ header {
 }
 
 @keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 #impostors-count-box input {
@@ -175,8 +196,13 @@ header {
     text-align: center;
 }
 
-#impostors-count-box input:hover {
+#impostors-count-box input:enabled:hover {
     background-color: var(--light-bg-2);
+}
+
+#impostors-count-box.disabled,
+#impostors-count-box.disabled * {
+    cursor: not-allowed;
 }
 
 
@@ -473,6 +499,7 @@ header {
     border: 10px dotted var(--hl);
     background-color: var(--gray);
     transition: all 0.2s ease-in-out;
+    min-height: 100px;
 }
 
 #playButt:hover {
@@ -480,177 +507,76 @@ header {
 }
 
 
+#word-settings {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+}
 
-@media (max-width: 550px) {
-    .cat-img {
-        font-size: 1em;
-    }
+#category-setting,
+#random-imp-setting {
+    font-size: 0.5em;
+    border: 3px dashed var(--dark-purple);
+    padding: 10px;
+    background-color: var(--dark-purple);
+    transition: all 0.2s ease-in-out;
+    border-radius: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
 
-    .cat-title {
-        font-size: 1em;
-    }
+#category-setting:hover,
+#random-imp-setting:hover {
+    background-color: var(--light-purple);
+}
 
-    header {
-        flex-wrap: wrap;
-        height: auto;
+#category-setting.active,
+#random-imp-setting.active {
+    background-color: var(--green) !important;
+}
+
+#category-setting.active:hover,
+#random-imp-setting.active:hover {
+    background-color: var(--light-green) !important;
+}
+
+#category-setting.hidden,
+#random-imp-setting.hidden {
+    display: none !important;
+}
+
+@media (max-width: 1165px) {
+    #main-page-box {
+        gap: 10px;
     }
 }
 
-@media (max-width: 500px) {
-    header>div {
-        font-size: 4em;
+@media (max-width: 830px) {
+    body {
+        gap: 50px;
+    }
+}
+
+@media (max-width: 780px) {
+    * {
+        font-size: 0.9em;
     }
 
     .main-page-button {
-        min-width: 200px;
-        width: auto;
-        gap: 20px;
-        font-size: 1.5em;
-    }
-
-    #playButt {
-        font-size: 2.5em;
-    }
-
-    #main-page-cats-box {
-        padding: 5px;
-    }
-
-    #m-p-c-c-close {
-        width: 50px;
-        height: 50px;
-        font-size: 2em;
-    }
-
-    #main-page-players-box {
+        min-width: 250px;
+        gap: 50px;
         padding: 10px;
     }
 
-    #m-p-p-c-plus {
-        width: 50px;
-        height: 50px;
-        font-size: 4em;
+    body {
+        gap: 5px;
     }
 
-    #m-p-p-c-close {
-        width: 50px;
-        height: 50px;
-        font-size: 2em;
-    }
-}
-
-@media (max-width: 850px) {
-    .m-p-p-c-name {
-        font-size: 1em;
-    }
-
-    .main-page-player-card {
-        padding: 5px;
-    }
-
-    .m-p-p-c-div {
-        width: 90%;
-    }
-
-    .m-p-p-c-del {
-        height: 40px;
-        font-size: 1.5em;
-    }
-
-    .m-p-p-c-num {
-        width: 20px;
-        font-size: 1.25em;
-    }
-}
-
-@media (max-width: 860px) {
-    header>div {
-        font-size: 4em;
-    }
-}
-
-@media (max-width: 700px) {
-    header>div {
-        font-size: 3em;
-    }
-
-    header {
-        justify-content: space-between;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-icon {
-        width: 45px;
-    }
-    .game-title {
-        /* Text shadow smaller on mobile */
-        text-shadow: 2px 2px 0px var(--dark-red), 0 0 10px var(--red);
-    }
-}
-
-/* Mobile Phones */
-@media (max-width: 500px) {
-    header {
-        flex-direction: column; /* Stack items if needed */
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .logo-container {
-        /* On very small screens, hide the second logo to save space? 
-           Or keep both but make them tiny. Let's keep both tiny. */
-        gap: 10px;
-    }
-
-    .header-icon {
-        width: 35px; /* Small icons */
-    }
-
-    .game-title {
-        /* The clamp() above handles font size, but we reduce spacing */
-        letter-spacing: 2px;
-    }
-
-    /* Move Language button to top right corner instead of centered right */
-    .lang-switch-wrapper {
-        top: 10px;
-        right: 10px;
-        transform: none;
-    }
-    
-    .lang-switch-wrapper img {
-        width: 35px;
-    }
-}
-
-@media (max-width: 450px) {
-    header {
-        /* 1. Create vertical breathing room at the top */
-        padding-top: 50px; 
-    }
-
-    .lang-switch-wrapper {
-        /* 2. Pin button to the top-right corner */
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        transform: none; /* Remove the vertical centering */
-    }
-
-    /* 3. Optional: Shrink the button slightly */
-    .lang-switch-wrapper img {
-        width: 35px;
-    }
-
-    /* 4. Ensure the logo text doesn't stay too huge */
-    .game-title {
-        font-size: 2.5rem; /* Force a safe size */
-    }
-    
-    .header-icon {
-        width: 30px; /* Shrink side icons to save width */
+    #word-settings {
+        max-width: 250px;
     }
 }
