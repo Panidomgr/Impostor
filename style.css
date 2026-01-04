@@ -555,6 +555,30 @@ header {
     }
 }
 
+@media (max-width: 850px) {
+    .m-p-p-c-name {
+        font-size: 1em;
+    }
+
+    .main-page-player-card {
+        padding: 5px;
+    }
+
+    .m-p-p-c-div {
+        width: 90%;
+    }
+
+    .m-p-p-c-del {
+        height: 40px;
+        font-size: 1.5em;
+    }
+
+    .m-p-p-c-num {
+        width: 20px;
+        font-size: 1.25em;
+    }
+}
+
 @media (max-width: 830px) {
     body {
         gap: 50px;
@@ -562,12 +586,7 @@ header {
 }
 
 @media (max-width: 780px) {
-    * {
-        font-size: 0.9em;
-    }
-
     .main-page-button {
-        min-width: 250px;
         gap: 50px;
         padding: 10px;
     }
@@ -578,5 +597,117 @@ header {
 
     #word-settings {
         max-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-icon {
+        width: 45px;
+    }
+
+    .game-title {
+        text-shadow: 2px 2px 0px var(--dark-red), 0 0 10px var(--red);
+    }
+
+    .main-page-button {
+        max-width: 250px !important;
+        min-width: 200px;
+        font-size: 1.5em !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .cat-img {
+        font-size: 1em;
+    }
+
+    header {
+        flex-wrap: wrap;
+        height: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    header>div {
+        font-size: 4em;
+    }
+
+    #main-page-cats-box {
+        padding: 5px;
+    }
+
+    #m-p-c-c-close {
+        width: 50px;
+        height: 50px;
+        font-size: 2em;
+    }
+
+    #main-page-players-box {
+        padding: 10px;
+    }
+
+    #m-p-p-c-plus {
+        width: 50px;
+        height: 50px;
+        font-size: 4em;
+    }
+
+    #m-p-p-c-close {
+        width: 50px;
+        height: 50px;
+        font-size: 2em;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .logo-container {
+        gap: 10px;
+    }
+
+    .header-icon {
+        width: 35px;
+    }
+
+    .game-title {
+        letter-spacing: 2px;
+    }
+
+    .lang-switch-wrapper {
+        top: 10px;
+        right: 10px;
+        transform: none;
+    }
+
+    .lang-switch-wrapper img {
+        width: 35px;
+    }
+}
+
+@media (max-width: 450px) {
+    header {
+        padding-top: 50px;
+    }
+
+    .lang-switch-wrapper {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        transform: none;
+    }
+
+    .lang-switch-wrapper img {
+        width: 35px;
+    }
+
+    .game-title {
+        font-size: 2.5rem;
+    }
+
+    .header-icon {
+        width: 30px;
     }
 }
