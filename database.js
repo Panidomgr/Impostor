@@ -207,7 +207,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Time",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoJP0zrUnyLLLs_d_lyzLpy39JsVZ8r3NYOA&s",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767579100/508174747_711079905059115_962717587555328981_n_xbcmdy.jpg",
         questions_A: {
             en: ["What time did you wake up today?", "How many hours did you sleep last night?", "What year were you born?", "How many minutes does it take you to get ready?", "At what age did you have your first kiss?", "How long was your longest relationship (months)?", "What time do you usually eat dinner?", "How many minutes late are you usually?", "How many hours do you game per week?"],
             gr: ["Τι ώρα ξύπνησες σήμερα;", "Πόσες ώρες κοιμήθηκες χθες;", "Ποια χρονιά γεννήθηκες;", "Πόσα λεπτά σου παίρνει να ετοιμαστείς;", "Σε ποια ηλικία έδωσες το πρώτο σου φιλί;", "Πόσο κράτησε η μεγαλύτερη σου σχέση (μήνες);", "Τι ώρα τρως συνήθως βραδινό;", "Πόσα λεπτά αργείς συνήθως;", "Πόσες ώρες παίζεις παιχνίδια την εβδομάδα;"]
@@ -231,7 +231,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Travel",
-        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859953/map_xqseag.jpg",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767579132/608349041_2077945076370497_9118597691484980851_n_uuw8t0.jpg",
         questions_A: {
             en: ["Which country did you visit last?", "What is your favorite city?", "Where do you want to go for your honeymoon?", "How many countries have you visited?", "What is the best airline?", "Where is the Eiffel Tower?", "How many days was your longest trip?", "What's the best island in Greece?", "Where would you live if not here?", "How many languages do you speak?"],
             gr: ["Ποια χώρα επισκέφτηκες τελευταία;", "Ποια είναι η αγαπημένη σου πόλη;", "Πού θες να πας για ταξίδι του μέλιτος;", "Πόσες χώρες έχεις επισκεφτεί;", "Ποια είναι η καλύτερη αεροπορική;", "Πού είναι ο Πύργος του Άιφελ;", "Πόσες μέρες ήταν το μεγαλύτερο ταξίδι σου;", "Ποιο είναι το καλύτερο νησί στην Ελλάδα;", "Πού θα έμενες αν όχι εδώ;", "Πόσες γλώσσες μιλάς;"]
@@ -255,7 +255,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Food",
-        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859958/food_xhtonq.png",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767579080/606623481_2738701016465372_1205413370236592703_n_habz3u.jpg",
         questions_A: {
             en: ["What is your favorite fruit?", "What did you eat for breakfast?", "Which vegetable do you hate?", "How many liters of water do you drink a day?", "What's your favorite pizza topping?", "What is the best fast food chain?", "What cuisine do you prefer?", "What is the weirdest thing you've eaten?", "How many times a week do you order out?", "What's your favorite drink?"],
             gr: ["Ποιο είναι το αγαπημένο σου φρούτο;", "Τι έφαγες για πρωινό;", "Ποιο λαχανικό σιχαίνεσαι;", "Πόσα λίτρα νερό πίνεις τη μέρα;", "Ποιο είναι το αγαπημένο σου υλικό στην πίτσα;", "Ποια είναι η καλύτερη αλυσίδα fast food;", "Ποια κουζίνα προτιμάς;", "Τι είναι το πιο περίεργο που έχεις φάει;", "Πόσες φορές τη βδομάδα παραγγέλνεις;", "Ποιο είναι το αγαπημένο σου ποτό;"]
@@ -279,7 +279,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Childhood",
-        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766860317/home_wh3zwh.jpg",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767578933/513520256_648014404960379_1826661995029752169_n_hy2bet.jpg",
         questions_A: {
             en: ["What was the name of your first pet?", "What was your favorite cartoon?", "Who was your favorite teacher?", "At what age did you learn to ride a bike?", "What was your favorite toy?", "Who was your childhood best friend?", "What sport did you play as a kid?", "What was your favorite subject?", "What scared you the most as a kid?", "How many times did you change schools?"],
             gr: ["Ποιο ήταν το όνομα του πρώτου σου κατοικιδίου;", "Ποιο ήταν το αγαπημένο σου παιδικό;", "Ποιος ήταν ο αγαπημένος σου δάσκαλος;", "Σε ποια ηλικία έμαθες ποδήλατο;", "Ποιο ήταν το αγαπημένο σου παιχνίδι;", "Ποιος ήταν ο κολλητός σου μικρός;", "Τι άθλημα έκανες μικρός;", "Ποιο ήταν το αγαπημένο σου μάθημα;", "Τι σε φόβιζε πιο πολύ μικρός;", "Πόσες φορές άλλαξες σχολείο;"]
@@ -303,7 +303,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Habits",
-        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859954/body_pjdiw6.png",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767579314/494822013_1441031420602325_2207204422222720688_n_xrwqhc.jpg",
         questions_A: {
             en: ["How often do you shower?", "What color is your toothbrush?", "What brand is your phone?", "How many times a week do you work out?", "What side of the bed do you sleep on?", "What shampoo do you use?", "How often do you wash your sheets?", "What's your shoe size?", "What time do you wake up on weekends?", "How many alarms do you set?"],
             gr: ["Κάθε πότε κάνεις μπάνιο;", "Τι χρώμα είναι η οδοντόβουρτσά σου;", "Τι μάρκα είναι το κινητό σου;", "Πόσες φορές τη βδομάδα γυμνάζεσαι;", "Σε ποια πλευρά του κρεβατιού κοιμάσαι;", "Τι σαμπουάν χρησιμοποιείς;", "Κάθε πότε πλένεις τα σεντόνια;", "Τι νούμερο παπούτσι φοράς;", "Τι ώρα ξυπνάς τα Σαββατοκύριακα;", "Πόσα ξυπνητήρια βάζεις;"]
@@ -327,7 +327,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Crime",
-        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859960/horror_s6zczh.jpg",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767579118/513088608_1267190504908072_2103476766707122221_n_ffpvr5.jpg",
         questions_A: {
             en: ["Have you ever stolen something?", "Have you ever been in a fight?", "How many times have you lied today?", "Where would you hide a body?", "What crime would you commit if legal?", "Have you ever hacked something?", "Who is the most likely to go to jail here?", "What's the most illegal thing you own?", "How many laws do you break daily?", "Would you survive in prison?"],
             gr: ["Έχεις κλέψει ποτέ κάτι;", "Έχεις μπλέξει ποτέ σε καβγά;", "Πόσες φορές είπες ψέματα σήμερα;", "Πού θα έκρυβες ένα πτώμα;", "Ποιο έγκλημα θα έκανες αν ήταν νόμιμο;", "Έχεις χακάρει ποτέ κάτι;", "Ποιος είναι πιο πιθανό να πάει φυλακή;", "Ποιο είναι το πιο παράνομο πράγμα που έχεις;", "Πόσους νόμους παραβιάζεις καθημερινά;", "Θα επιβίωνες στη φυλακή;"]
@@ -351,7 +351,7 @@ export const categoriesQuestions = [
     },
     {
         id: "Money",
-        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1766859957/countries_bieyz5.png",
+        img: "https://res.cloudinary.com/dhon1edrf/image/upload/f_auto,q_auto/v1767578933/Icon_VBucks_v2zyjy.webp",
         questions_A: {
             en: ["How much money do you have in your wallet?", "What is the most expensive thing you own?", "How much would you pay to go to space?", "Who owes you money?", "How much is your rent?", "What is your dream job?", "How much did your phone cost?", "Who is the richest person you know?", "What would you buy with 1 million?", "How much do you tip?"],
             gr: ["Πόσα λεφτά έχεις στο πορτοφόλι σου;", "Ποιο είναι το πιο ακριβό πράγμα που έχεις;", "Πόσα θα πλήρωνες για να πας στο διάστημα;", "Ποιος σου χρωστάει λεφτά;", "Πόσο είναι το νοίκι σου;", "Ποια είναι η δουλειά των ονείρων σου;", "Πόσο κόστισε το κινητό σου;", "Ποιος είναι ο πιο πλούσιος που ξέρεις;", "Τι θα αγόραζες με 1 εκατομμύριο;", "Πόσα αφήνεις φιλοδώρημα;"]
@@ -529,3 +529,4 @@ export const translations = {
         play_again_msg: "Είσαι σίγουρος ότι θέλεις να παίξεις ξανά;"
     }
 };
+
